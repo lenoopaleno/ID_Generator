@@ -17,3 +17,9 @@ _*Sex part of PESEL is described well, but if it's even it means that the owner 
 _**Control number is a result of mathematic function. Evey number in PESEL has its own wage, pattern looks like this: 1-3-7-9-1-3-7-9-1-3
 to get Control number each number has to be multiplicated by corresponding wage. Then all of the results has te be added.
 Finally we have to take ones digit and substract it from the 10. That's how we get it._
+
+## Changelog
+
+### v. 1.0 
+#### 24.07.2022
+Whole program is working properly. 
