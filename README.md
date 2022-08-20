@@ -22,4 +22,10 @@ Finally we have to take ones digit and substract it from the 10. That's how we g
 
 ### v. 1.0 
 #### 24.07.2022
-Whole program is working properly. 
+* Whole program is working properly. 
+
+### v. 1.1
+#### 20.08.2022
+* New identity now exists as a struct.
+* *  Struct has a json tags (for future reasons)
+* Code cleanup
