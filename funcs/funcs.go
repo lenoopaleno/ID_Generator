@@ -7,7 +7,6 @@ import (
 	"log"
 	"math/rand"
 	"os"
-	"reflect"
 	"strconv"
 	"strings"
 	"time"
@@ -19,20 +18,11 @@ var womenLN = "Databases/nazwiska_żeńskie-osoby_żyjące_soxLKbB.csv"
 var menFN = "Databases/8_-_WYKAZ_IMION_MĘSKICH_OSÓB_ŻYJĄCYCH_WG_POLA_IMIĘ_PIERWSZE_WYSTĘPUJĄCYCH_W_REJESTRZE_PESEL_BEZ_ZGONÓW.csv"
 var menLN = "Databases/NAZWISKA_MĘSKIE-OSOBY_ŻYJĄCE_oAcmDus.csv"
 
-type Person struct {
-	FullName    string `json:"full_name"`
-	LastName    string `json:"last_name"`
-	DateOfBirth string `json:"date_of_birth"`
-	Sex         string `json:"sex"`
-	PESEL       string `json:"pesel"`
-}
 type Persons struct {
 	IMIEPIERWSZE string
 }
 
-var person Person
-
-func Randate() (int, int, int, string) {
+func Randate() (int, int, int) {
 	rand.Seed(time.Now().Unix())
 	X := time.Now()
 	minY := 1971
@@ -44,26 +34,14 @@ func Randate() (int, int, int, string) {
 	minD := 1
 	maxD := 30
 	D := rand.Intn(maxD-minD) + minD
-	DOB := fmt.Sprintf("%d-%d-%d\n", Y, M, D)
 
-	return Y, M, D, DOB
+	return Y, M, D
 }
 
-func Sex(identity Person) (Person, int) {
-	rand.Seed(time.Now().Unix())
-	S := rand.Intn(8999) + 1000
-	if S%2 == 0 {
-		identity.Sex = "Woman"
-		identity.FullName = Chosname(womenFN)
-		identity.LastName = Chosname(womenLN)
+func RandateToDOB(Y int, M int, D int) string {
+	DOB := fmt.Sprintf("%d-%d-%d\n", Y, M, D)
 
-	} else {
-		identity.Sex = "Man"
-		identity.FullName = Chosname(menFN)
-		identity.LastName = Chosname(menLN)
-
-	}
-	return identity, S
+	return DOB
 }
 
 func PESEL(Y int, M int, D int, S int) string {
@@ -104,7 +82,6 @@ func PESEL(Y int, M int, D int, S int) string {
 	}
 
 	result := strings.Join(valuesText, "")
-	person.PESEL = result
 
 	return result
 }
@@ -149,14 +126,4 @@ func Chosname(filePath string) string {
 	}
 
 	return persons[rName].IMIEPIERWSZE
-}
-
-func Represent(person Person) {
-	s := reflect.ValueOf(&person).Elem()
-	typeOfT := s.Type()
-	for i := 0; i < s.NumField(); i++ {
-		f := s.Field(i)
-		fmt.Printf("%s: %v\n",
-			typeOfT.Field(i).Name, f.Interface())
-	}
 }
