@@ -39,7 +39,7 @@ func Randate() (int, int, int) {
 }
 
 func RandateToDOB(Y int, M int, D int) string {
-	DOB := fmt.Sprintf("%d-%d-%d\n", Y, M, D)
+	DOB := fmt.Sprintf("%d-%d-%d", Y, M, D)
 
 	return DOB
 }
@@ -96,7 +96,7 @@ func checkError(message string, err error) {
 func Chosname(filePath string) string {
 	rand.Seed(time.Now().Unix())
 	var persons []Persons
-	rName := rand.Intn(200)
+	rName := rand.Intn(100)
 	isFirstRow := true
 	headerMap := make(map[string]int)
 
